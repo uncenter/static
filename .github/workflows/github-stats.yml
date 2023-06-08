@@ -49,5 +49,5 @@ jobs:
                   git config --global user.email "github-stats[bot]@jstrieb.github.io"
                   git add .
                   # Force the build to succeed, even if no files were changed
-                  git commit -m 'Update generated files' || true
+                  git commit -m 'chore: update github-stats generated images' || true
                   git push
