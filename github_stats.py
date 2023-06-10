@@ -118,7 +118,7 @@ class Queries(object):
 
     @staticmethod
     def repos_overview(
-        contrib_cursor: Optional[str] = None, owned_cursor: Optional[str] = None
+        contrib_cursor: Optional[str] = None, owned_cursor: Optional[str] = None, exclude_private_repos: bool = False
     ) -> str:
         """
         :return: GraphQL query with overview of user repositories
@@ -128,6 +128,7 @@ class Queries(object):
     login,
     name,
     repositories(
+        {"privacy: PUBLIC," if exclude_private_repos else ""}
         first: 100,
         orderBy: {{
             field: UPDATED_AT,
@@ -258,9 +259,11 @@ class Stats(object):
         exclude_repos: Optional[Set] = None,
         exclude_langs: Optional[Set] = None,
         ignore_forked_repos: bool = False,
+        exclude_private_repos: bool = False,
     ):
         self.username = username
         self._ignore_forked_repos = ignore_forked_repos
+        self._exclude_private_repos = exclude_private_repos
         self._exclude_repos = set() if exclude_repos is None else exclude_repos
         self._exclude_langs = set() if exclude_langs is None else exclude_langs
         self.queries = Queries(username, access_token, session)
@@ -311,7 +314,7 @@ Languages:
         while True:
             raw_results = await self.queries.query(
                 Queries.repos_overview(
-                    owned_cursor=next_owned, contrib_cursor=next_contrib
+                    owned_cursor=next_owned, contrib_cursor=next_contrib, exclude_private_repos=self._exclude_private_repos
                 )
             )
             raw_results = raw_results if raw_results is not None else {}
