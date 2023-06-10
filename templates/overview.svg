@@ -54,6 +54,10 @@ td {
   color: #233;
 }
 
+tr > td:nth-child(1) {
+  font-weight: 600;
+}
+
 #gh-dark-mode-only:target td {
   color: #adbac7;
 }
