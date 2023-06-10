@@ -101,7 +101,7 @@ div.ellipsis {
 }
 
 #gh-dark-mode-only:target .lang {
-  color: #c9d1d9;
+  color: #adbac7;
 }
 
 .percent {
