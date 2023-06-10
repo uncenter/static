@@ -36,13 +36,13 @@ th {
   padding: 0.5em;
   padding-top: 0;
   text-align: left;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
-  color: rgb(3, 102, 214);
+  color: #0A69DA;
 }
 
 #gh-dark-mode-only:target th {
-  color: #58a6ff;
+  color: #549BF5;
 }
 
 td {
