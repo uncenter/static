@@ -3,29 +3,13 @@
 import asyncio
 import os
 import re
-
 import aiohttp
 
 from github_stats import Stats
 
-
-################################################################################
-# Helper Functions
-################################################################################
-
-
 def generate_output_folder() -> None:
-    """
-    Create the output folder if it does not already exist
-    """
     if not os.path.isdir("generated"):
         os.mkdir("generated")
-
-
-################################################################################
-# Individual Image Generation Functions
-################################################################################
-
 
 async def generate_overview(s: Stats) -> None:
     """
@@ -61,8 +45,8 @@ async def generate_languages(s: Stats) -> None:
     lang_list = ""
     sorted_languages = sorted(
         (await s.languages).items(), reverse=True, key=lambda t: t[1].get("size")
-    )
-    for i, (lang, data) in enumerate(sorted_languages):
+    )[:10]
+    for lang, data in sorted_languages:
         color = data.get("color")
         color = color if color is not None else "#000000"
         progress += (
@@ -72,8 +56,7 @@ async def generate_languages(s: Stats) -> None:
         )
         lang_list += f"""
 <li>
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:{color};"
-viewBox="0 0 16 16" version="1.1" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:{color};" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">{lang}</span>
 <span class="percent">{data.get("prop", 0):0.2f}%</span>
 </li>
@@ -87,19 +70,12 @@ viewBox="0 0 16 16" version="1.1" width="16" height="16"><circle xmlns="http://w
     with open("generated/languages.svg", "w") as f:
         f.write(output)
 
-
-################################################################################
-# Main Function
-################################################################################
-
-
 async def main() -> None:
     """
     Generate all badges
     """
     access_token = os.getenv("ACCESS_TOKEN")
     if not access_token:
-        # access_token = os.getenv("GITHUB_TOKEN")
         raise Exception("A personal access token is required to proceed!")
     user = os.getenv("GITHUB_ACTOR")
     if user is None:
@@ -112,7 +88,6 @@ async def main() -> None:
     excluded_langs = (
         {x.strip() for x in exclude_langs.split(",")} if exclude_langs else None
     )
-    # Convert a truthy value to a Boolean
     raw_exclude_forked_repos = os.getenv("EXCLUDE_FORKED_REPOS")
     exclude_forked_repos = (
         not not raw_exclude_forked_repos
