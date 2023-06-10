@@ -33,8 +33,8 @@ table {
 }
 
 th {
-  padding: 0.5em;
-  padding-top: 0;
+  padding-bottom: 0.5em;
+  padding-left: 0.25em;
   text-align: left;
   font-size: 18px;
   font-weight: 600;
@@ -51,11 +51,11 @@ td {
   padding: 0.25em;
   font-size: 12px;
   line-height: 18px;
-  color: rgb(88, 96, 105);
+  color: #233;
 }
 
 #gh-dark-mode-only:target td {
-  color: #c9d1d9;
+  color: #adbac7;
 }
 
 .octicon {
