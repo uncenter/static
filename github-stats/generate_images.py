@@ -9,9 +9,11 @@ from github_stats import Stats
 
 __DIRNAME__ = os.path.realpath(os.path.dirname(__file__))
 
+
 def create_output_folder() -> None:
-    if not os.path.isdir(os.path.join(os.path.join(__DIRNAME__,"generated"))):
-        os.mkdir(os.path.join(__DIRNAME__,"generated"))
+    if not os.path.isdir(os.path.join(os.path.join(__DIRNAME__, "generated"))):
+        os.mkdir(os.path.join(__DIRNAME__, "generated"))
+
 
 async def generate_overview(s: Stats) -> None:
     """
@@ -31,7 +33,9 @@ async def generate_overview(s: Stats) -> None:
     output = re.sub("{{ repos }}", f"{len(await s.repos):,}", output)
 
     create_output_folder()
-    with open(os.path.join(__DIRNAME__, "generated/overview.svg"), "w") as f:
+    with open(
+        os.path.join(__DIRNAME__, "generated/github-stats-overview.svg"), "w"
+    ) as f:
         f.write(output)
 
 
@@ -68,8 +72,11 @@ async def generate_languages(s: Stats) -> None:
     output = re.sub(r"{{ lang_list }}", lang_list, output)
 
     create_output_folder()
-    with open(os.path.join(__DIRNAME__, "generated/languages.svg"), "w") as f:
+    with open(
+        os.path.join(__DIRNAME__, "generated/github-stats-languages.svg"), "w"
+    ) as f:
         f.write(output)
+
 
 async def main() -> None:
     access_token = os.getenv("ACCESS_TOKEN")
