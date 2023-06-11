@@ -4,10 +4,10 @@
 
 A workflow that generates various statistics about my GitHub activity in the form of SVGs (in the [`/generated`](/generated) directory). Check out the [original project (GitHub Stats Visualization)](https://github.com/jstrieb/github-stats) and [idiotWu's more updated fork](https://github.com/idiotWu/stats) that this was inspired by.
 
-![](https://raw.githubusercontent.com/uncenter/static/github-stats-overview.svg#gh-dark-mode-only)
-![](https://raw.githubusercontent.com/uncenter/static/github-stats-languages.svg#gh-dark-mode-only)
-![](https://raw.githubusercontent.com/uncenter/static/github-stats-overview.svg#gh-light-mode-only)
-![](https://raw.githubusercontent.com/uncenter/static/github-stats-languages.svg#gh-light-mode-only)
+![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview.svg#gh-dark-mode-only)
+![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages.svg#gh-dark-mode-only)
+![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview.svg#gh-light-mode-only)
+![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages.svg#gh-light-mode-only)
 
 ### Features
 
