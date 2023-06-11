@@ -23,7 +23,7 @@ A workflow that generates various statistics about my GitHub activity in the for
 <!-- TODO: Add details and screenshots -->
 
 1. Create a personal access token (not the default GitHub Actions token) using the instructions [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). This personal access token must have permissions: `read:user` and `repo`. Copy the access token when it is generated and save it somewhere secure - if you lose it, you will have to regenerate the token.
-2. Clone or download the related files (`.github/workflows/github-stats.yml`, `templates/`, `.gitattributes`, `.gitignore`, `generate_images.py`, `github_stats.py`, `requirements.txt`) and add them to a repository of your own.
+2. Clone or download the related files (in the `github-stats` subdirectory) and add them to a repository of your own.
 3. Go to the "Secrets" page of your copy of the repository: click the "Settings" tab of the newly-created repository, expand the "Secrets and variables" section on the left, and click "Actions".
 4. Create a new secret with the name `ACCESS_TOKEN` and paste your copied personal access token as the value.
 5. It is possible to change the type of statistics reported by adding other repository secrets.
