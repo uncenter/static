@@ -43,8 +43,12 @@ jobs:
 
             - name: Commit generated images
               run: |
+                  mv -v generated /tmp/generated
+                  git checkout github-stats || git checkout -b github-stats || exit 0
                   git config --global user.name "github-actions"
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  git add .
+                  rm -rf *
+                  mv -v /tmp/generated/* .
+                  git add --all
                   git commit -m 'chore: update github-stats generated images' || true
-                  git push
+                  git push origin github-stats
