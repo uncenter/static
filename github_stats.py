@@ -108,11 +108,12 @@ class Queries(object):
 
     @staticmethod
     def repos_overview(
-        contrib_cursor: Optional[str] = None, owned_cursor: Optional[str] = None, exclude_private_repos: bool = False
+        contrib_cursor: Optional[str] = None, owned_cursor: Optional[str] = None, options: Dict = dict()
     ) -> str:
         """
         :return: GraphQL query with overview of user repositories
         """
+        exclude_private_repos = options.get("exclude_private_repos", False)
         return f"""{{
   viewer {{
     login,
@@ -125,6 +126,7 @@ class Queries(object):
             direction: DESC
         }},
         isFork: false,
+        ownerAffiliations: [OWNER, ORGANIZATION_MEMBER],
         after: {"null" if owned_cursor is None else '"'+ owned_cursor +'"'}
     ) {{
       pageInfo {{
@@ -279,7 +281,7 @@ class Stats(object):
         return f"""Name: {await self.name}
 Stargazers: {await self.stargazers:,}
 Forks: {await self.forks:,}
-All-time contributions: {await self.total_contributions:,}
+Total contributions: {await self.total_contributions:,}
 Repositories with contributions: {len(await self.repos)}
 Lines of code added: {lines_changed[0]:,}
 Lines of code deleted: {lines_changed[1]:,}
@@ -304,7 +306,9 @@ Languages:
         while True:
             raw_results = await self.queries.query(
                 Queries.repos_overview(
-                    owned_cursor=next_owned, contrib_cursor=next_contrib, exclude_private_repos=self._exclude_private_repos
+                    owned_cursor=next_owned, contrib_cursor=next_contrib, options={
+                        "exclude_private_repos": self._exclude_private_repos,
+                    }
                 )
             )
             raw_results = raw_results if raw_results is not None else {}
@@ -512,12 +516,6 @@ Languages:
 
         self._views = total
         return total
-
-
-###############################################################################
-# Main Function
-###############################################################################
-
 
 async def main() -> None:
     """
