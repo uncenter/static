@@ -122,7 +122,7 @@ div.ellipsis {
 
 <div>
 <span class="progress">
-<span style="background-color: #3572A5;width: 26.148%;" class="progress-item"></span><span style="background-color: #f1e05a;width: 24.157%;" class="progress-item"></span><span style="background-color: #3178c6;width: 22.912%;" class="progress-item"></span><span style="background-color: #c6538c;width: 14.248%;" class="progress-item"></span><span style="background-color: #3d8137;width: 8.539%;" class="progress-item"></span><span style="background-color: #563d7c;width: 2.994%;" class="progress-item"></span><span style="background-color: #f34b7d;width: 0.457%;" class="progress-item"></span><span style="background-color: #e34c26;width: 0.339%;" class="progress-item"></span><span style="background-color: #f7931e;width: 0.192%;" class="progress-item"></span><span style="background-color: #000080;width: 0.015%;" class="progress-item"></span>
+<span style="background-color: #3178c6;width: 93.544%;" class="progress-item"></span><span style="background-color: #f1e05a;width: 4.938%;" class="progress-item"></span><span style="background-color: #3572A5;width: 0.574%;" class="progress-item"></span><span style="background-color: #3D6117;width: 0.264%;" class="progress-item"></span><span style="background-color: #c6538c;width: 0.146%;" class="progress-item"></span><span style="background-color: #3d8137;width: 0.133%;" class="progress-item"></span><span style="background-color: #563d7c;width: 0.078%;" class="progress-item"></span><span style="background-color: #198CE7;width: 0.076%;" class="progress-item"></span><span style="background-color: #02f88c;width: 0.060%;" class="progress-item"></span><span style="background-color: #f34b7d;width: 0.054%;" class="progress-item"></span>
 </span>
 </div>
 
@@ -130,72 +130,72 @@ div.ellipsis {
 
 
 <li>
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3572A5;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
-<span class="lang">Python</span>
-<span class="percent">26.15%</span>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3178c6;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">TypeScript</span>
+<span class="percent">93.54%</span>
 </li>
 
 
 <li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#f1e05a;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">JavaScript</span>
-<span class="percent">24.16%</span>
+<span class="percent">4.94%</span>
 </li>
 
 
 <li>
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3178c6;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
-<span class="lang">TypeScript</span>
-<span class="percent">22.91%</span>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3572A5;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">Python</span>
+<span class="percent">0.57%</span>
+</li>
+
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3D6117;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">TeX</span>
+<span class="percent">0.26%</span>
 </li>
 
 
 <li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#c6538c;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">SCSS</span>
-<span class="percent">14.25%</span>
+<span class="percent">0.15%</span>
 </li>
 
 
 <li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3d8137;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">Nunjucks</span>
-<span class="percent">8.54%</span>
+<span class="percent">0.13%</span>
 </li>
 
 
 <li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#563d7c;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">CSS</span>
-<span class="percent">2.99%</span>
+<span class="percent">0.08%</span>
+</li>
+
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#198CE7;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">R</span>
+<span class="percent">0.08%</span>
+</li>
+
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#02f88c;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">Ada</span>
+<span class="percent">0.06%</span>
 </li>
 
 
 <li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#f34b7d;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">C++</span>
-<span class="percent">0.46%</span>
-</li>
-
-
-<li>
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#e34c26;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
-<span class="lang">HTML</span>
-<span class="percent">0.34%</span>
-</li>
-
-
-<li>
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#f7931e;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
-<span class="lang">Handlebars</span>
-<span class="percent">0.19%</span>
-</li>
-
-
-<li>
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#000080;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
-<span class="lang">Lua</span>
-<span class="percent">0.02%</span>
+<span class="percent">0.05%</span>
 </li>
 
 
