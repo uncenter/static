@@ -1,4 +1,4 @@
-name: Generate github-stats images
+name: "[github-stats]"
 
 on:
     push:
@@ -13,9 +13,6 @@ permissions:
 jobs:
     build:
         runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: ./github-stats
 
         steps:
             - uses: actions/checkout@v3
@@ -32,7 +29,7 @@ jobs:
                   python3 -m pip install --upgrade pip setuptools wheel
                   python3 -m pip install -r requirements.txt
 
-            - name: Fetch data and generate images
+            - name: Query and generate images
               run: |
                   python3 --version
                   python3 generate_images.py
@@ -44,10 +41,9 @@ jobs:
                   EXCLUDE_FORKED_REPOS: true
                   EXCLUDE_PRIVATE_REPOS: true
 
-            - name: Commit generated images
+            - name: Commit and push changes
               run: |
                   mv -v generated /tmp/generated
-                  cd ..
                   git checkout github-stats || git checkout --orphan github-stats || exit 0
                   git config --global user.name "github-actions"
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
