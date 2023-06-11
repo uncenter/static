@@ -1,0 +1,187 @@
+<svg id="gh-dark-mode-only" width="360" height="210" xmlns="http://www.w3.org/2000/svg">
+<style>
+svg {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+#background {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  fill: white;
+  stroke: rgb(225, 228, 232);
+  stroke-width: 1px;
+  rx: 6px;
+  ry: 6px;
+}
+
+#gh-dark-mode-only:target #background {
+  fill: #0d1117;
+  stroke-width: 0.5px;
+}
+
+foreignObject {
+  width: calc(100% - 10px - 32px);
+  height: calc(100% - 10px - 24px);
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  line-height: 24px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0A69DA;
+}
+
+#gh-dark-mode-only:target h2 {
+  color: #549BF5;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  flex: 1;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li {
+  display: inline-flex;
+  font-size: 12px;
+  margin-right: 2ch;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+div.ellipsis {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octicon {
+  fill: rgb(88, 96, 105);
+  margin-right: 0.5ch;
+  vertical-align: top;
+}
+
+#gh-dark-mode-only:target .octicon {
+  color: #8b949e;
+  fill: #8b949e;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  overflow: hidden;
+  background-color: rgb(225, 228, 232);
+  border-radius: 6px;
+  outline: 1px solid transparent;
+  margin-bottom: 1em;
+}
+
+#gh-dark-mode-only:target .progress {
+  background-color: rgba(110, 118, 129, 0.4);
+}
+
+.progress-item {
+  border-collapse: collapse;
+}
+
+.lang {
+  font-weight: 600;
+  margin-right: 4px;
+  color: #233;
+}
+
+#gh-dark-mode-only:target .lang {
+  color: #adbac7;
+}
+
+.percent {
+  color: rgb(88, 96, 105)
+}
+
+#gh-dark-mode-only:target .percent {
+  color: #8b949e;
+}
+</style>
+<g>
+<rect x="5" y="5" id="background" />
+<g>
+<foreignObject x="21" y="17" width="318" height="176">
+<div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
+
+<h2>Most Used Languages</h2>
+
+<div>
+<span class="progress">
+<span style="background-color: #f1e05a;width: 27.301%;" class="progress-item"></span><span style="background-color: #3572A5;width: 24.566%;" class="progress-item"></span><span style="background-color: #3178c6;width: 22.487%;" class="progress-item"></span><span style="background-color: #c6538c;width: 13.984%;" class="progress-item"></span><span style="background-color: #3d8137;width: 8.366%;" class="progress-item"></span><span style="background-color: #563d7c;width: 2.938%;" class="progress-item"></span><span style="background-color: #f7931e;width: 0.188%;" class="progress-item"></span><span style="background-color: #e34c26;width: 0.170%;" class="progress-item"></span>
+</span>
+</div>
+
+<ul>
+
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#f1e05a;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">JavaScript</span>
+<span class="percent">27.30%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3572A5;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">Python</span>
+<span class="percent">24.57%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3178c6;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">TypeScript</span>
+<span class="percent">22.49%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#c6538c;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">SCSS</span>
+<span class="percent">13.98%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3d8137;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">Nunjucks</span>
+<span class="percent">8.37%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#563d7c;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">CSS</span>
+<span class="percent">2.94%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#f7931e;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">Handlebars</span>
+<span class="percent">0.19%</span>
+</li>
+
+<li>
+<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#e34c26;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
+<span class="lang">HTML</span>
+<span class="percent">0.17%</span>
+</li>
+
+
+</ul>
+
+</div>
+</foreignObject>
+</g>
+</g>
+</svg>

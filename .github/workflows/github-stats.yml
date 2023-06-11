@@ -1,54 +1,50 @@
-name: Generate github-stats images
+name: "[github-stats]"
 
 on:
-    push:
-        branches: [master]
-    schedule:
-        - cron: "5 0 * * *"
-    workflow_dispatch:
+  push:
+  pull_request:
+  schedule:
+    - cron: "5 0 * * *"
+  workflow_dispatch:
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Set up Python 3.8
-              uses: actions/setup-python@v4
-              with:
-                  python-version: "3.8"
-                  architecture: "x64"
-                  cache: "pip"
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+          cache: "pip"
 
-            - name: Install requirements
-              run: |
-                  python3 -m pip install --upgrade pip setuptools wheel
-                  python3 -m pip install -r requirements.txt
+      - name: Install requirements
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip install -r github-stats/requirements.txt
 
-            - name: Fetch data and generate images
-              run: |
-                  python3 --version
-                  python3 generate_images.py
-              env:
-                  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  EXCLUDED: uncenter/learn,uncenter/analytics
-                  EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
-                  EXCLUDE_FORKED_REPOS: true
-                  EXCLUDE_PRIVATE_REPOS: true
+      - name: Query and generate images
+        run: |
+          python3 --version
+          python3 github-stats/generate_images.py
+          mv github-stats/generated/* .
+          rmdir github-stats/generated
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDED: uncenter/learn,uncenter/analytics
+          EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
+          EXCLUDE_FORKED_REPOS: true
+          EXCLUDE_PRIVATE_REPOS: true
 
-            - name: Commit generated images
-              run: |
-                  mv -v generated /tmp/generated
-                  git checkout github-stats || git checkout --orphan github-stats || exit 0
-                  git config --global user.name "github-actions"
-                  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  find . -mindepth 1 -path './.git' -prune -o -exec rm -rf {} \; || true
-                  mv -v /tmp/generated/* .
-                  git add --all
-                  git commit -m 'chore: update github-stats generated images' || true
-                  git push origin github-stats
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "chore: update github-stats generated images"

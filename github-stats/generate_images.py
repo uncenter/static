@@ -7,16 +7,18 @@ import aiohttp
 
 from github_stats import Stats
 
-def generate_output_folder() -> None:
-    if not os.path.isdir("generated"):
-        os.mkdir("generated")
+__DIRNAME__ = os.path.realpath(os.path.dirname(__file__))
+
+def create_output_folder() -> None:
+    if not os.path.isdir(os.path.join(os.path.join(__DIRNAME__,"generated"))):
+        os.mkdir(os.path.join(__DIRNAME__,"generated"))
 
 async def generate_overview(s: Stats) -> None:
     """
     Generate an SVG badge with summary statistics
     :param s: Represents user's GitHub statistics
     """
-    with open("templates/overview.svg", "r") as f:
+    with open(os.path.join(__DIRNAME__, "templates/overview.svg"), "r") as f:
         output = f.read()
 
     output = re.sub("{{ name }}", await s.name, output)
@@ -28,8 +30,8 @@ async def generate_overview(s: Stats) -> None:
     output = re.sub("{{ views }}", f"{await s.views:,}", output)
     output = re.sub("{{ repos }}", f"{len(await s.repos):,}", output)
 
-    generate_output_folder()
-    with open("generated/overview.svg", "w") as f:
+    create_output_folder()
+    with open(os.path.join(__DIRNAME__, "generated/overview.svg"), "w") as f:
         f.write(output)
 
 
@@ -38,7 +40,7 @@ async def generate_languages(s: Stats) -> None:
     Generate an SVG badge with summary languages used
     :param s: Represents user's GitHub statistics
     """
-    with open("templates/languages.svg", "r") as f:
+    with open(os.path.join(__DIRNAME__, "templates/languages.svg"), "r") as f:
         output = f.read()
 
     progress = ""
@@ -60,20 +62,16 @@ async def generate_languages(s: Stats) -> None:
 <span class="lang">{lang}</span>
 <span class="percent">{data.get("prop", 0):0.2f}%</span>
 </li>
-
 """
 
     output = re.sub(r"{{ progress }}", progress, output)
     output = re.sub(r"{{ lang_list }}", lang_list, output)
 
-    generate_output_folder()
-    with open("generated/languages.svg", "w") as f:
+    create_output_folder()
+    with open(os.path.join(__DIRNAME__, "generated/languages.svg"), "w") as f:
         f.write(output)
 
 async def main() -> None:
-    """
-    Generate all badges
-    """
     access_token = os.getenv("ACCESS_TOKEN")
     if not access_token:
         raise Exception("A personal access token is required to proceed!")

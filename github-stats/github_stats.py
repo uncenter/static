@@ -7,11 +7,6 @@ import os
 from typing import Dict, List, Optional, Set, Tuple, Any, cast
 
 class Queries(object):
-    """
-    Class with functions to query the GitHub GraphQL (v4) API and the REST (v3)
-    API. Also includes functions to dynamically generate GraphQL queries.
-    """
-
     def __init__(
         self,
         username: str,
@@ -26,8 +21,6 @@ class Queries(object):
 
     async def query(self, generated_query: str) -> Dict:
         """
-        Make a request to the GraphQL API using the authentication token from
-        the environment
         :param generated_query: string query to be sent to the API
         :return: decoded GraphQL JSON output
         """
@@ -60,7 +53,6 @@ class Queries(object):
 
     async def query_rest(self, path: str, params: Optional[Dict] = None) -> Dict:
         """
-        Make a request to the REST API
         :param path: API path to query
         :param params: Query parameters to be passed to the API
         :return: deserialized REST JSON output
@@ -268,27 +260,6 @@ class Stats(object):
         self._repos: Optional[Set[str]] = None
         self._lines_changed: Optional[Tuple[int, int]] = None
         self._views: Optional[int] = None
-
-    async def to_str(self) -> str:
-        """
-        :return: summary of all available statistics
-        """
-        languages = await self.languages_proportional
-        formatted_languages = "\n  - ".join(
-            [f"{k}: {v:0.4f}%" for k, v in languages.items()]
-        )
-        lines_changed = await self.lines_changed
-        return f"""Name: {await self.name}
-Stargazers: {await self.stargazers:,}
-Forks: {await self.forks:,}
-Total contributions: {await self.total_contributions:,}
-Repositories with contributions: {len(await self.repos)}
-Lines of code added: {lines_changed[0]:,}
-Lines of code deleted: {lines_changed[1]:,}
-Lines of code changed: {lines_changed[0] + lines_changed[1]:,}
-Project page views: {await self.views:,}
-Languages:
-  - {formatted_languages}"""
 
     async def get_stats(self) -> None:
         """
@@ -529,7 +500,6 @@ async def main() -> None:
         )
     async with aiohttp.ClientSession() as session:
         s = Stats(user, access_token, session)
-        print(await s.to_str())
 
 
 if __name__ == "__main__":
