@@ -47,6 +47,7 @@ jobs:
             - name: Commit generated images
               run: |
                   mv -v generated /tmp/generated
+                  cd ..
                   git checkout github-stats || git checkout --orphan github-stats || exit 0
                   git config --global user.name "github-actions"
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
