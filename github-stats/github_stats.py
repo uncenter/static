@@ -6,6 +6,7 @@ import asyncio
 import os
 from typing import Dict, List, Optional, Set, Tuple, Any, cast
 
+
 class Queries(object):
     def __init__(
         self,
@@ -100,7 +101,9 @@ class Queries(object):
 
     @staticmethod
     def repos_overview(
-        contrib_cursor: Optional[str] = None, owned_cursor: Optional[str] = None, options: Dict = dict()
+        contrib_cursor: Optional[str] = None,
+        owned_cursor: Optional[str] = None,
+        options: Dict = dict(),
     ) -> str:
         """
         :return: GraphQL query with overview of user repositories
@@ -277,9 +280,11 @@ class Stats(object):
         while True:
             raw_results = await self.queries.query(
                 Queries.repos_overview(
-                    owned_cursor=next_owned, contrib_cursor=next_contrib, options={
+                    owned_cursor=next_owned,
+                    contrib_cursor=next_contrib,
+                    options={
                         "exclude_private_repos": self._exclude_private_repos,
-                    }
+                    },
                 )
             )
             raw_results = raw_results if raw_results is not None else {}
@@ -487,6 +492,7 @@ class Stats(object):
 
         self._views = total
         return total
+
 
 async def main() -> None:
     """
