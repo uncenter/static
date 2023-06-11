@@ -13,12 +13,12 @@ permissions:
 jobs:
     build:
         runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: ./github-stats
 
         steps:
             - uses: actions/checkout@v3
-
-            - name: Switch into github-stats directory
-              run: cd github-stats
 
             - name: Set up Python 3.8
               uses: actions/setup-python@v4
