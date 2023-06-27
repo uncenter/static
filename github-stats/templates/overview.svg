@@ -17,8 +17,10 @@ table {
 
 th {
     text-align: left;
-    margin: {{ styles.heading.margin }}
-    padding: {{ styles.heading.padding }}
+    margin: 0;
+    padding: 0;
+    padding-bottom: {{ styles.heading.margin-bottom }};
+    padding-left: 0.25em;
     font-size: {{ styles.heading.font-size }};
     font-weight: {{ styles.heading.font-weight }};
     line-height: {{ styles.heading.line-height }};

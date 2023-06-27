@@ -30,6 +30,10 @@
     "octicon": {
         "selector": ".octicon",
         "properties": {
+            "both": {
+                "margin-right": "1ch",
+                "vertical-align": "top"
+            },
             "light": {
                 "color": "#586069",
                 "fill": "#586069"
@@ -47,8 +51,7 @@
                 "font-size": "18px",
                 "font-weight": "600",
                 "line-height": "24px",
-                "margin": "0 0 0.75em 0",
-                "padding": "0"
+                "margin-bottom": "0.75em"
             },
             "light": {
                 "color": "#0A69DA"

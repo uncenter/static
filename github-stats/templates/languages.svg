@@ -10,8 +10,9 @@ foreignObject {
 }
 
 h2 {
-    margin: {{ styles.heading.margin }}
-    padding: {{ styles.heading.padding }}
+    margin: 0;
+    padding: 0;
+    margin-bottom: {{ styles.heading.margin-bottom }};
     font-size: {{ styles.heading.font-size }};
     font-weight: {{ styles.heading.font-weight }};
     line-height: {{ styles.heading.line-height }};
@@ -50,7 +51,7 @@ div.ellipsis {
     display: flex;
     height: 8px;
     overflow: hidden;
-    background-color: {{ styles.progress.background-color }}
+    background-color: {{ styles.progress.background-color }};
     border-radius: 6px;
     outline: 1px solid transparent;
     margin-bottom: 1em;
@@ -63,11 +64,11 @@ div.ellipsis {
 .lang {
     font-weight: {{ styles.element.font-weight }};
     margin-right: 4px;
-    color: {{ styles.element.color }}
+    color: {{ styles.element.color }};
 }
 
 .percent {
-    color: {{ styles.octicon.color }}
+    color: {{ styles.octicon.color }};
 }
 </style>
 <g>
