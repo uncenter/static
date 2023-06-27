@@ -1,15 +1,17 @@
 <svg width="360" height="210" xmlns="http://www.w3.org/2000/svg">
 <style>
-svg {font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+svg {
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
 }
 
-#background {width: calc(100% - 10px);
-height: calc(100% - 10px);
-stroke: rgb(225, 228, 232);
-rx: 6px;
-ry: 6px;
-fill: #0d1117;
-stroke-width: 0.5px;
+#background {
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	stroke: rgb(225, 228, 232);
+	rx: 6px;
+	ry: 6px;
+	fill: #0d1117;
+	stroke-width: 0.5px;
 }
 
 foreignObject {
@@ -18,8 +20,9 @@ foreignObject {
 }
 
 h2 {
-    margin: 0 0 0.75em 0
-    padding: 0
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0.75em;
     font-size: 18px;
     font-weight: 600;
     line-height: 24px;
@@ -52,15 +55,18 @@ div.ellipsis {
     text-overflow: ellipsis;
 }
 
-.octicon {color: #8b949e;
-fill: #8b949e;
+.octicon {
+	margin-right: 1ch;
+	vertical-align: top;
+	color: #8b949e;
+	fill: #8b949e;
 }
 
 .progress {
     display: flex;
     height: 8px;
     overflow: hidden;
-    background-color: rgba(110, 118, 129, 0.4)
+    background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
     outline: 1px solid transparent;
     margin-bottom: 1em;
@@ -73,11 +79,11 @@ fill: #8b949e;
 .lang {
     font-weight: 600;
     margin-right: 4px;
-    color: #ADBAC7
+    color: #ADBAC7;
 }
 
 .percent {
-    color: #8b949e
+    color: #8b949e;
 }
 </style>
 <g>
