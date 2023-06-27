@@ -40,7 +40,6 @@ class Queries(object):
                 return result
         except:
             print("aiohttp failed for GraphQL query")
-            # Fall back on non-async requests
             async with self.semaphore:
                 r_requests = requests.post(
                     "https://api.github.com/graphql",
@@ -346,8 +345,6 @@ class Stats(object):
             else:
                 break
 
-        # TODO: Improve languages to scale by number of contributions to
-        #       specific filetypes
         langs_total = sum([v.get("size", 0) for v in self._languages.values()])
         for k, v in self._languages.items():
             v["prop"] = 100 * (v.get("size", 0) / langs_total)
@@ -355,7 +352,7 @@ class Stats(object):
     @property
     async def name(self) -> str:
         """
-        :return: GitHub user's name (e.g., Jacob Strieb)
+        :return: GitHub user's name
         """
         if self._name is not None:
             return self._name
@@ -458,7 +455,6 @@ class Stats(object):
         for repo in await self.repos:
             r = await self.queries.query_rest(f"/repos/{repo}/stats/contributors")
             for author_obj in r:
-                # Handle malformed response from the API by skipping this repo
                 if not isinstance(author_obj, dict) or not isinstance(
                     author_obj.get("author", {}), dict
                 ):
