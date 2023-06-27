@@ -80,7 +80,6 @@ async def generate_overview(s: Stats) -> None:
             "forks": f"{await s.forks:,}",
             "contributions": f"{await s.total_contributions:,}",
             "lines_changed": f"{((await s.lines_changed)[0] + (await s.lines_changed)[1]):,}",
-            "views": f"{await s.views:,}",
             "repos": f"{len(await s.repos):,}",
         },
         template,

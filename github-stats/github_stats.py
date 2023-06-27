@@ -262,7 +262,6 @@ class Stats(object):
         self._languages: Optional[Dict[str, Any]] = None
         self._repos: Optional[Set[str]] = None
         self._lines_changed: Optional[Tuple[int, int]] = None
-        self._views: Optional[int] = None
 
     async def get_stats(self) -> None:
         """
@@ -474,24 +473,6 @@ class Stats(object):
 
         self._lines_changed = (additions, deletions)
         return self._lines_changed
-
-    @property
-    async def views(self) -> int:
-        """
-        Note: only returns views for the last 14 days (as-per GitHub API)
-        :return: total number of page views the user's projects have received
-        """
-        if self._views is not None:
-            return self._views
-
-        total = 0
-        for repo in await self.repos:
-            r = await self.queries.query_rest(f"/repos/{repo}/traffic/views")
-            for view in r.get("views", []):
-                total += view.get("count", 0)
-
-        self._views = total
-        return total
 
 
 async def main() -> None:
