@@ -107,7 +107,7 @@ async def generate_languages(s: Stats) -> None:
     lang_list = ""
     sorted_languages = sorted(
         (await s.languages).items(), reverse=True, key=lambda t: t[1].get("size")
-    )[:10]
+    )[:8]
     for lang, data in sorted_languages:
         color = data.get("color")
         color = color if color is not None else "#000000"
