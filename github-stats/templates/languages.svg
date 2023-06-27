@@ -30,17 +30,17 @@ ul {
 }
 
 li {
-    line-height: 21px;
+    line-height: {{ styles.element.line-height }};
     display: inline-flex;
     font-size: {{ styles.element.font-size }};
     align-items: center;
     flex-wrap: nowrap;
+    padding: {{ styles.element.padding }};
 }
 
 div.ellipsis {
     display: flex;
     flex-flow: column;
-    height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -74,7 +74,7 @@ div.ellipsis {
 <g>
     <rect x="5" y="5" id="background" />
         <g>
-            <foreignObject x="21" y="17" width="318" height="176">
+            <foreignObject x="21" y="21" width="318" height="176">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
                     <h2>Most Used Languages</h2>
                     <div>
