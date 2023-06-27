@@ -37,9 +37,8 @@ jobs:
           rmdir github-stats/generated
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXCLUDED: uncenter/learn,uncenter/analytics
-          EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
+          EXCLUDED: uncenter/analytics
+          EXCLUDED_LANGS: ""
           EXCLUDE_FORKED_REPOS: true
           EXCLUDE_PRIVATE_REPOS: true
 

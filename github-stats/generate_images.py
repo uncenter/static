@@ -4,6 +4,7 @@ import asyncio
 import os
 import re
 import aiohttp
+import json
 
 from github_stats import Stats
 
@@ -15,28 +16,83 @@ def create_output_folder() -> None:
         os.mkdir(os.path.join(__DIRNAME__, "generated"))
 
 
+def replace_with_data(data, content):
+    for key, value in data.items():
+        content = re.sub("{{ " + key + " }}", value, content)
+    return content
+
+
+def get_inserted_styles():
+    with open(os.path.join(__DIRNAME__, "templates/styles.json"), "r") as f:
+        raw_styles = json.load(f)
+
+    dark_styles = {}
+    light_styles = {}
+    for key, value in raw_styles.items():
+        _selector = value.get("selector")
+        _properties = value.get("properties")
+        _both = (
+            (_properties.get("both").items()) if _properties.get("both") != None else {}
+        )
+        _light = (
+            (_properties.get("light").items())
+            if _properties.get("light") != None
+            else {}
+        )
+        _dark = (
+            (_properties.get("dark").items()) if _properties.get("dark") != None else {}
+        )
+        if _selector != False:
+            _both_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _both])
+            _light_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _light])
+            _dark_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _dark])
+            light_styles[
+                key
+            ] = f"{_selector} {{\n{_both_properties}{_light_properties}}}"
+            dark_styles[key] = f"{_selector} {{\n{_both_properties}{_dark_properties}}}"
+
+        for prop, val in _light:
+            light_styles[f"{key}.{prop}"] = val
+        for prop, val in _dark:
+            dark_styles[f"{key}.{prop}"] = val
+        for prop, val in _both:
+            light_styles[f"{key}.{prop}"] = val
+            dark_styles[f"{key}.{prop}"] = val
+
+    return {
+        "light": {f"styles.{key}": value for key, value in light_styles.items()},
+        "dark": {f"styles.{key}": value for key, value in dark_styles.items()},
+    }
+
+
 async def generate_overview(s: Stats) -> None:
     """
     Generate an SVG badge with summary statistics
     :param s: Represents user's GitHub statistics
     """
     with open(os.path.join(__DIRNAME__, "templates/overview.svg"), "r") as f:
-        output = f.read()
+        template = f.read()
 
-    output = re.sub("{{ name }}", await s.name, output)
-    output = re.sub("{{ stars }}", f"{await s.stargazers:,}", output)
-    output = re.sub("{{ forks }}", f"{await s.forks:,}", output)
-    output = re.sub("{{ contributions }}", f"{await s.total_contributions:,}", output)
-    changed = (await s.lines_changed)[0] + (await s.lines_changed)[1]
-    output = re.sub("{{ lines_changed }}", f"{changed:,}", output)
-    output = re.sub("{{ views }}", f"{await s.views:,}", output)
-    output = re.sub("{{ repos }}", f"{len(await s.repos):,}", output)
+    output = replace_with_data(
+        {
+            "name": await s.name,
+            "stars": f"{await s.stargazers:,}",
+            "forks": f"{await s.forks:,}",
+            "contributions": f"{await s.total_contributions:,}",
+            "lines_changed": f"{((await s.lines_changed)[0] + (await s.lines_changed)[1]):,}",
+            "repos": f"{len(await s.repos):,}",
+        },
+        template,
+    )
 
     create_output_folder()
-    with open(
-        os.path.join(__DIRNAME__, "generated/github-stats-overview.svg"), "w"
-    ) as f:
-        f.write(output)
+
+    for theme in ["light", "dark"]:
+        with open(
+            os.path.join(__DIRNAME__, f"generated/github-stats-overview-{theme}.svg"),
+            "w",
+        ) as f:
+            f.write(replace_with_data(get_inserted_styles()[theme], output))
 
 
 async def generate_languages(s: Stats) -> None:
@@ -45,13 +101,13 @@ async def generate_languages(s: Stats) -> None:
     :param s: Represents user's GitHub statistics
     """
     with open(os.path.join(__DIRNAME__, "templates/languages.svg"), "r") as f:
-        output = f.read()
+        template = f.read()
 
     progress = ""
     lang_list = ""
     sorted_languages = sorted(
         (await s.languages).items(), reverse=True, key=lambda t: t[1].get("size")
-    )[:10]
+    )[:8]
     for lang, data in sorted_languages:
         color = data.get("color")
         color = color if color is not None else "#000000"
@@ -68,14 +124,22 @@ async def generate_languages(s: Stats) -> None:
 </li>
 """
 
-    output = re.sub(r"{{ progress }}", progress, output)
-    output = re.sub(r"{{ lang_list }}", lang_list, output)
+    output = replace_with_data(
+        {
+            "progress": progress,
+            "lang_list": lang_list,
+        },
+        template,
+    )
 
     create_output_folder()
-    with open(
-        os.path.join(__DIRNAME__, "generated/github-stats-languages.svg"), "w"
-    ) as f:
-        f.write(output)
+
+    for theme in ["light", "dark"]:
+        with open(
+            os.path.join(__DIRNAME__, f"generated/github-stats-languages-{theme}.svg"),
+            "w",
+        ) as f:
+            f.write(replace_with_data(get_inserted_styles()[theme], output))
 
 
 async def main() -> None:

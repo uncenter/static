@@ -1,0 +1,92 @@
+{
+    "svg": {
+        "selector": "svg",
+        "properties": {
+            "both": {
+                "font-family": "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"
+            }
+        }
+    },
+    "background": {
+        "selector": "#background",
+        "properties": {
+            "both": {
+                "width": "calc(100% - 10px)",
+                "height": "calc(100% - 10px)",
+                "stroke": "rgb(225, 228, 232)",
+                "rx": "6px",
+                "ry": "6px"
+            },
+            "light": {
+                "fill": "white",
+                "stroke-width": "1px"
+            },
+            "dark": {
+                "fill": "#0d1117",
+                "stroke-width": "0.5px"
+            }
+        }
+    },
+    "octicon": {
+        "selector": ".octicon",
+        "properties": {
+            "both": {
+                "margin-right": "1ch",
+                "vertical-align": "top"
+            },
+            "light": {
+                "color": "#586069",
+                "fill": "#586069"
+            },
+            "dark": {
+                "color": "#8b949e",
+                "fill": "#8b949e"
+            }
+        }
+    },
+    "heading": {
+        "selector": false,
+        "properties": {
+            "both": {
+                "font-size": "18px",
+                "font-weight": "600",
+                "line-height": "24px",
+                "margin-bottom": "0.75em"
+            },
+            "light": {
+                "color": "#0A69DA"
+            },
+            "dark": {
+                "color": "#549BF5"
+            }
+        }
+    },
+    "element": {
+        "selector": false,
+        "properties": {
+            "both": {
+                "font-weight": "600",
+                "font-size": "12px",
+                "padding": "0.25em 0",
+                "line-height": "21px"
+            },
+            "light": {
+                "color": "#233"
+            },
+            "dark": {
+                "color": "#ADBAC7"
+            }
+        }
+    },
+    "progress": {
+        "selector": false,
+        "properties": {
+            "light": {
+                "background-color": "rgb(225, 228, 232)"
+            },
+            "dark": {
+                "background-color": "rgba(110, 118, 129, 0.4)"
+            }
+        }
+    }
+}
