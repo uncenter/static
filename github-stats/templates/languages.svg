@@ -1,139 +1,91 @@
-<svg id="gh-dark-mode-only" width="360" height="210" xmlns="http://www.w3.org/2000/svg">
+<svg width="360" height="210" xmlns="http://www.w3.org/2000/svg">
 <style>
-svg {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-  font-size: 14px;
-  line-height: 21px;
-}
+{{ styles.svg }}
 
-#background {
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  fill: white;
-  stroke: rgb(225, 228, 232);
-  stroke-width: 1px;
-  rx: 6px;
-  ry: 6px;
-}
-
-#gh-dark-mode-only:target #background {
-  fill: #0d1117;
-  stroke-width: 0.5px;
-}
+{{ styles.background }}
 
 foreignObject {
-  width: calc(100% - 10px - 32px);
-  height: calc(100% - 10px - 24px);
+    width: calc(100% - 10px - 32px);
+    height: calc(100% - 10px - 24px);
 }
 
 h2 {
-  margin-top: 0;
-  margin-bottom: 0.75em;
-  line-height: 24px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #0A69DA;
-}
-
-#gh-dark-mode-only:target h2 {
-  color: #549BF5;
+    margin: {{ styles.heading.margin }}
+    padding: {{ styles.heading.padding }}
+    font-size: {{ styles.heading.font-size }};
+    font-weight: {{ styles.heading.font-weight }};
+    line-height: {{ styles.heading.line-height }};
+    color: {{ styles.heading.color }};
 }
 
 ul {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  flex: 1;
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex: 1;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 li {
-  display: inline-flex;
-  font-size: 12px;
-  margin-right: 2ch;
-  align-items: center;
-  flex-wrap: nowrap;
+    line-height: 21px;
+    display: inline-flex;
+    font-size: {{ styles.element.font-size }};
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 div.ellipsis {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.octicon {
-  fill: rgb(88, 96, 105);
-  margin-right: 0.5ch;
-  vertical-align: top;
-}
-
-#gh-dark-mode-only:target .octicon {
-  color: #8b949e;
-  fill: #8b949e;
-}
+{{ styles.octicon }}
 
 .progress {
-  display: flex;
-  height: 8px;
-  overflow: hidden;
-  background-color: rgb(225, 228, 232);
-  border-radius: 6px;
-  outline: 1px solid transparent;
-  margin-bottom: 1em;
-}
-
-#gh-dark-mode-only:target .progress {
-  background-color: rgba(110, 118, 129, 0.4);
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    background-color: {{ styles.progress.background-color }}
+    border-radius: 6px;
+    outline: 1px solid transparent;
+    margin-bottom: 1em;
 }
 
 .progress-item {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 .lang {
-  font-weight: 600;
-  margin-right: 4px;
-  color: #233;
-}
-
-#gh-dark-mode-only:target .lang {
-  color: #adbac7;
+    font-weight: {{ styles.element.font-weight }};
+    margin-right: 4px;
+    color: {{ styles.element.color }}
 }
 
 .percent {
-  color: rgb(88, 96, 105)
-}
-
-#gh-dark-mode-only:target .percent {
-  color: #8b949e;
+    color: {{ styles.octicon.color }}
 }
 </style>
 <g>
-<rect x="5" y="5" id="background" />
-<g>
-<foreignObject x="21" y="17" width="318" height="176">
-<div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
-
-<h2>Most Used Languages</h2>
-
-<div>
-<span class="progress">
-{{ progress }}
-</span>
-</div>
-
-<ul>
-
-{{ lang_list }}
-
-</ul>
-
-</div>
-</foreignObject>
-</g>
-</g>
+    <rect x="5" y="5" id="background" />
+        <g>
+            <foreignObject x="21" y="17" width="318" height="176">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
+                    <h2>Most Used Languages</h2>
+                    <div>
+                        <span class="progress">
+                        {{ progress }}
+                        </span>
+                    </div>
+                    <ul>
+                    {{ lang_list }}
+                    </ul>
+                </div>
+            </foreignObject>
+        </g>
+    </g>
 </svg>
