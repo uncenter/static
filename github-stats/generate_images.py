@@ -43,11 +43,13 @@ def get_inserted_styles():
             (_properties.get("dark").items()) if _properties.get("dark") != None else {}
         )
         if _selector != False:
-            _both_properties = "".join([f"{prop}: {val};\n" for prop, val in _both])
-            _light_properties = "".join([f"{prop}: {val};\n" for prop, val in _light])
-            _dark_properties = "".join([f"{prop}: {val};\n" for prop, val in _dark])
-            light_styles[key] = f"{_selector} {{{_both_properties}{_light_properties}}}"
-            dark_styles[key] = f"{_selector} {{{_both_properties}{_dark_properties}}}"
+            _both_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _both])
+            _light_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _light])
+            _dark_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _dark])
+            light_styles[
+                key
+            ] = f"{_selector} {{\n{_both_properties}{_light_properties}}}"
+            dark_styles[key] = f"{_selector} {{\n{_both_properties}{_dark_properties}}}"
 
         for prop, val in _light:
             light_styles[f"{key}.{prop}"] = val
