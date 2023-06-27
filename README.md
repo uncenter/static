@@ -18,6 +18,25 @@ A workflow that generates various statistics about my GitHub activity in the for
 -   Larger color circles for each language label
 -   `EXCLUDE_PRIVATE_REPOS` option
 
+### Displaying with media queries
+
+```html
+<picture>
+  <source
+    srcset="https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-dark.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg" />
+</picture>
+<picture>
+  <source
+    srcset="https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-dark.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-light.svg" />
+</picture>
+```
+
 ### Options
 
 -   For each of the following options, add a new secret with the name and value to your repository's secrets (under the `Settings` tab). Some of the values are added as secrets by default to prevent leaking information about private repositories. If you're not worried about that, you can change the values directly in the workflow itself - just replace `VARIABLE_NAME: ${{ secrets.VARIABLE_NAME }}` with the value you want, like `VARIABLE_NAME: true`.
