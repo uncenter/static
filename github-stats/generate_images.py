@@ -92,7 +92,7 @@ def get_inserted_styles():
     }
 
 
-async def generate_overview(s: Stats) -> None:
+async def generate_overview(s: Stats, output_path: str) -> None:
     """
     Generate the overview image.
 
@@ -119,13 +119,15 @@ async def generate_overview(s: Stats) -> None:
 
     for theme in ["light", "dark"]:
         with open(
-            os.path.join(__OUTPUT_DIR__, f"github-stats-overview-{theme}.svg"),
+            os.path.join(
+                __OUTPUT_DIR__, replace_with_data({"theme": theme}, output_path)
+            ),
             "w",
         ) as f:
             f.write(replace_with_data(get_inserted_styles()[theme], output))
 
 
-async def generate_languages(s: Stats) -> None:
+async def generate_languages(s: Stats, output_path: str) -> None:
     """
     Generate the languages image.
 
@@ -167,13 +169,15 @@ async def generate_languages(s: Stats) -> None:
 
     for theme in ["light", "dark"]:
         with open(
-            os.path.join(__OUTPUT_DIR__, f"github-stats-languages-{theme}.svg"),
+            os.path.join(
+                __OUTPUT_DIR__, replace_with_data({"theme": theme}, output_path)
+            ),
             "w",
         ) as f:
             f.write(replace_with_data(get_inserted_styles()[theme], output))
 
 
-async def generate_community(s: Stats) -> None:
+async def generate_community(s: Stats, output_path: str) -> None:
     """
     Generate the community image.
 
@@ -199,7 +203,9 @@ async def generate_community(s: Stats) -> None:
 
     for theme in ["light", "dark"]:
         with open(
-            os.path.join(__OUTPUT_DIR__, f"github-stats-community-{theme}.svg"),
+            os.path.join(
+                __OUTPUT_DIR__, replace_with_data({"theme": theme}, output_path)
+            ),
             "w",
         ) as f:
             f.write(replace_with_data(get_inserted_styles()[theme], output))
@@ -248,6 +254,16 @@ async def main() -> None:
     excluded_langs = string_to_list(os.getenv("EXCLUDED_LANGS"))
     exclude_forked_repos = truthy(os.getenv("EXCLUDE_FORKED_REPOS"))
     exclude_private_repos = truthy(os.getenv("EXCLUDE_PRIVATE_REPOS"))
+    generated_image_path = os.getenv("GENERATED_IMAGE_PATH")
+    if generated_image_path is None:
+        raise RuntimeError("Environment variable GENERATED_IMAGE_PATH must be set.")
+    else:
+        generated_image_path = generated_image_path.strip()
+        if generated_image_path.endswith(".svg") is False:
+            raise RuntimeError(
+                "Environment variable GENERATED_IMAGE_PATH must end with .svg"
+            )
+
     async with aiohttp.ClientSession() as session:
         s = Stats(
             user,
@@ -259,7 +275,27 @@ async def main() -> None:
             exclude_private_repos=exclude_private_repos,
         )
         await asyncio.gather(
-            generate_languages(s), generate_overview(s), generate_community(s)
+            generate_languages(
+                s,
+                replace_with_data(
+                    {
+                        "template": "languages",
+                    },
+                    generated_image_path,
+                ),
+            ),
+            generate_overview(
+                s,
+                replace_with_data(
+                    {
+                        "template": "overview",
+                    },
+                    generated_image_path,
+                ),
+            ),
+            generate_community(
+                s, replace_with_data({"template": "community"}, generated_image_path)
+            ),
         )
 
 

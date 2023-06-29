@@ -41,6 +41,7 @@ jobs:
           EXCLUDED_LANGS: ""
           EXCLUDE_FORKED_REPOS: true
           EXCLUDE_PRIVATE_REPOS: true
+          GENERATED_IMAGE_NAME: "github-stats-{{ template }}-{{ theme }}.svg"
 
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
