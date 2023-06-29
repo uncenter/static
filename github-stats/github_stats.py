@@ -23,9 +23,13 @@ class Queries(object):
 
     async def query(self, generated_query: str) -> Dict:
         """
-        :param generated_query: string query to be sent to the API
-        :return: decoded GraphQL JSON output
+        Args:
+            generated_query (str): string query to be sent to the API
+
+        Returns:
+            Dict: decoded GraphQL JSON output
         """
+
         headers = {
             "Authorization": f"Bearer {self.access_token}",
         }
@@ -54,9 +58,12 @@ class Queries(object):
 
     async def query_rest(self, path: str, params: Optional[Dict] = None) -> Dict:
         """
-        :param path: API path to query
-        :param params: Query parameters to be passed to the API
-        :return: deserialized REST JSON output
+        Args:
+            path (str): API path to query
+            params (Optional[Dict], optional): Query parameters to be passed to the API. Defaults to None.
+
+        Returns:
+            Dict: deserialized REST JSON output
         """
 
         for _ in range(60):
@@ -100,14 +107,24 @@ class Queries(object):
         return dict()
 
     @staticmethod
-    def repos_overview(
+    def overview(
         contrib_cursor: Optional[str] = None,
         owned_cursor: Optional[str] = None,
         options: Dict = dict(),
     ) -> str:
         """
-        :return: GraphQL query with overview of user repositories
+        Returns a GraphQL query to get overall stats for a user
+
+        Args:
+            contrib_cursor (Optional[str], optional): cursor for contributions. Defaults to None.
+            owned_cursor (Optional[str], optional): cursor for owned repositories. Defaults to None.
+            options (Dict, optional): options for the query. Defaults to dict().
+                exclude_private_repos (bool, optional): whether to exclude private repos. Defaults to False.
+
+        Returns:
+            str: GraphQL query
         """
+
         exclude_private_repos = options.get("exclude_private_repos", False)
         return f"""{{
   viewer {{
@@ -201,8 +218,12 @@ class Queries(object):
     @staticmethod
     def contrib_years() -> str:
         """
-        :return: GraphQL query to get all years the user has been a contributor
+        Returns a GraphQL query to get the years for which a user has contributions
+
+        Returns:
+            str: GraphQL query
         """
+
         return """
 query {
   viewer {
@@ -216,9 +237,13 @@ query {
     @staticmethod
     def contribs_by_year(year: str) -> str:
         """
-        :param year: year to query for
-        :return: portion of a GraphQL query with desired info for a given year
+        Args:
+            year (str): year to query for
+
+        Returns:
+            str: portion of a GraphQL query with desired info for a given year
         """
+
         return f"""
     year{year}: contributionsCollection(
         from: "{year}-01-01T00:00:00Z",
@@ -233,9 +258,15 @@ query {
     @classmethod
     def all_contribs(cls, years: List[str]) -> str:
         """
-        :param years: list of years to get contributions for
-        :return: query to retrieve contribution information for all user years
+        Get contributions for all years
+
+        Args:
+            years (List[str]): list of years to get contributions for
+
+        Returns:
+            str: GraphQL query
         """
+
         by_years = "\n".join(map(cls.contribs_by_year, years))
         return f"""
 query {{
@@ -283,20 +314,19 @@ class Stats(object):
 
     async def get_stats(self) -> None:
         """
-        Get lots of summary statistics using one big query. Sets many attributes
+        Get statistics about GitHub usage.
         """
+
         self._stargazers = 0
         self._forks = 0
         self._languages = dict()
         self._repos = set()
 
-        exclude_langs_lower = {x.lower() for x in self._exclude_langs}
-
         next_owned = None
         next_contrib = None
         while True:
             raw_results = await self.queries.query(
-                Queries.repos_overview(
+                Queries.overview(
                     owned_cursor=next_owned,
                     contrib_cursor=next_contrib,
                     options={
@@ -313,14 +343,15 @@ class Stats(object):
                     .get("viewer", {})
                     .get("login", "No Name")
                 )
+
             created_at = (
                 raw_results.get("data", {}).get("viewer", {}).get("createdAt", None)
             )
-
             if created_at is not None:
                 self._joined = pendulum.parse(created_at).diff_for_humans()
             else:
                 self._joined = "Unknown"
+
             self._followers = (
                 raw_results.get("data", {})
                 .get("viewer", {})
@@ -372,7 +403,7 @@ class Stats(object):
                 for lang in repo.get("languages", {}).get("edges", []):
                     name = lang.get("node", {}).get("name", "Other")
                     languages = await self.languages
-                    if name.lower() in exclude_langs_lower:
+                    if name.lower() in {x.lower() for x in self._exclude_langs}:
                         continue
                     if name in languages:
                         languages[name]["size"] += lang.get("size", 0)
@@ -403,8 +434,10 @@ class Stats(object):
     @property
     async def name(self) -> str:
         """
-        :return: GitHub user's name
+        Returns:
+            str: GitHub user's name
         """
+
         if self._name is not None:
             return self._name
         await self.get_stats()
@@ -414,8 +447,10 @@ class Stats(object):
     @property
     async def joined(self) -> str:
         """
-        :return: GitHub user's join date (relative)
+        Returns:
+            str: GitHub user's join date (relative)
         """
+
         if self._joined is not None:
             return self._joined
         await self.get_stats()
@@ -425,8 +460,10 @@ class Stats(object):
     @property
     async def followers(self) -> int:
         """
-        :return: total number of followers
+        Returns:
+            int: total number of followers
         """
+
         if self._followers is not None:
             return self._followers
         await self.get_stats()
@@ -436,8 +473,10 @@ class Stats(object):
     @property
     async def following(self) -> int:
         """
-        :return: total number of users followed by the user
+        Returns:
+            int: total number of users followed by the user
         """
+
         if self._following is not None:
             return self._following
         await self.get_stats()
@@ -447,8 +486,10 @@ class Stats(object):
     @property
     async def sponsoring(self) -> int:
         """
-        :return: total number of users and organizations sponsored by the user
+        Returns:
+            int: total number of users and organizations sponsored by the user
         """
+
         if self._sponsoring is not None:
             return self._sponsoring
         await self.get_stats()
@@ -458,8 +499,10 @@ class Stats(object):
     @property
     async def starred_repos(self) -> int:
         """
-        :return: total number of repos starred by the user
+        Returns:
+            int: total number of repos starred by the user
         """
+
         if self._starred_repos is not None:
             return self._starred_repos
         await self.get_stats()
@@ -469,8 +512,10 @@ class Stats(object):
     @property
     async def stargazers(self) -> int:
         """
-        :return: total number of stargazers on user's repos
+        Returns:
+            int: total number of stargazers on user's repos
         """
+
         if self._stargazers is not None:
             return self._stargazers
         await self.get_stats()
@@ -480,8 +525,10 @@ class Stats(object):
     @property
     async def forks(self) -> int:
         """
-        :return: total number of forks on user's repos
+        Returns:
+            int: total number of forks on user's repos
         """
+
         if self._forks is not None:
             return self._forks
         await self.get_stats()
@@ -491,8 +538,10 @@ class Stats(object):
     @property
     async def languages(self) -> Dict:
         """
-        :return: summary of languages used by the user
+        Returns:
+            Dict: summary of languages used by the user
         """
+
         if self._languages is not None:
             return self._languages
         await self.get_stats()
@@ -502,8 +551,10 @@ class Stats(object):
     @property
     async def languages_proportional(self) -> Dict:
         """
-        :return: summary of languages used by the user, with proportional usage
+        Returns:
+            Dict: summary of languages used by the user, with proportional usage
         """
+
         if self._languages is None:
             await self.get_stats()
             assert self._languages is not None
@@ -513,8 +564,10 @@ class Stats(object):
     @property
     async def repos(self) -> Set[str]:
         """
-        :return: list of names of user's repos
+        Returns:
+            Set[str]: list of names of user's repos
         """
+
         if self._repos is not None:
             return self._repos
         await self.get_stats()
@@ -524,8 +577,10 @@ class Stats(object):
     @property
     async def total_contributions(self) -> int:
         """
-        :return: count of user's total contributions as defined by GitHub
+        Returns:
+            int: count of user's total contributions as defined by GitHub
         """
+
         if self._total_contributions is not None:
             return self._total_contributions
 
@@ -552,8 +607,10 @@ class Stats(object):
     @property
     async def lines_changed(self) -> Tuple[int, int]:
         """
-        :return: count of total lines added, removed, or modified by the user
+        Returns:
+            Tuple[int, int]: count of lines added and deleted by the user (Tuple[additions, deletions])
         """
+
         if self._lines_changed is not None:
             return self._lines_changed
         additions = 0
@@ -578,9 +635,6 @@ class Stats(object):
 
 
 async def main() -> None:
-    """
-    Used mostly for testing; this module is not usually run standalone
-    """
     access_token = os.getenv("ACCESS_TOKEN")
     user = os.getenv("GITHUB_ACTOR")
     if access_token is None or user is None:
