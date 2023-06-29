@@ -82,7 +82,7 @@ class Queries(object):
                         params=tuple(params.items()),
                     )
                 if r_async.status == 202:
-                    print(f"A path returned 202. Retrying...")
+                    print("A path returned 202. Retrying...")
                     await asyncio.sleep(2)
                     continue
 
@@ -90,7 +90,6 @@ class Queries(object):
                 if result is not None:
                     return result
             except:
-                print("aiohttp failed for rest query")
                 async with self.semaphore:
                     r_requests = requests.get(
                         f"https://api.github.com/{path}",
@@ -98,7 +97,7 @@ class Queries(object):
                         params=tuple(params.items()),
                     )
                     if r_requests.status_code == 202:
-                        print(f"A path returned 202. Retrying...")
+                        print("A path returned 202. Retrying...")
                         await asyncio.sleep(2)
                         continue
                     elif r_requests.status_code == 200:
@@ -127,93 +126,92 @@ class Queries(object):
 
         exclude_private_repos = options.get("exclude_private_repos", False)
         return f"""{{
-  viewer {{
-    login,
-    name,
-    createdAt,
-    followers {{
-        totalCount
-    }},
-    following {{
-        totalCount
-    }},
-    sponsoring {{
-        totalCount
-    }},
-    starredRepositories {{
-        totalCount
-    }},
-    repositories(
-        {"privacy: PUBLIC," if exclude_private_repos else ""}
-        first: 100,
-        orderBy: {{
-            field: UPDATED_AT,
-            direction: DESC
+    viewer {{
+        login,
+        name,
+        createdAt,
+        followers {{
+            totalCount
         }},
-        isFork: false,
-        ownerAffiliations: [OWNER, ORGANIZATION_MEMBER],
-        after: {"null" if owned_cursor is None else '"'+ owned_cursor +'"'}
-    ) {{
-      pageInfo {{
-        hasNextPage
-        endCursor
-      }}
-      nodes {{
-        nameWithOwner
-        stargazers {{
-          totalCount
-        }}
-        forkCount
-        languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
-          edges {{
-            size
-            node {{
-              name
-              color
-            }}
-          }}
-        }}
-      }}
-    }}
-    repositoriesContributedTo(
-        first: 100,
-        includeUserRepositories: false,
-        orderBy: {{
-            field: UPDATED_AT,
-            direction: DESC
+        following {{
+            totalCount
         }},
-        contributionTypes: [
-            COMMIT,
-            PULL_REQUEST,
-            REPOSITORY,
-            PULL_REQUEST_REVIEW
-        ]
-        after: {"null" if contrib_cursor is None else '"'+ contrib_cursor +'"'}
-    ) {{
-      pageInfo {{
-        hasNextPage
-        endCursor
-      }}
-      nodes {{
-        nameWithOwner
-        stargazers {{
-          totalCount
-        }}
-        forkCount
-        languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
-          edges {{
-            size
-            node {{
-              name
-              color
+        sponsoring {{
+            totalCount
+        }},
+        starredRepositories {{
+            totalCount
+        }},
+        repositories(
+            {"privacy: PUBLIC," if exclude_private_repos else ""}
+            first: 100,
+            orderBy: {{
+                field: UPDATED_AT,
+                direction: DESC
+            }},
+            isFork: false,
+            ownerAffiliations: [OWNER, ORGANIZATION_MEMBER],
+            after: {"null" if owned_cursor is None else '"'+ owned_cursor +'"'}
+        ) {{
+            pageInfo {{
+                hasNextPage
+                endCursor
             }}
-          }}
+            nodes {{
+                nameWithOwner
+                stargazers {{
+                    totalCount
+                }}
+                forkCount
+                languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
+                    edges {{
+                        size
+                        node {{
+                            name
+                            color
+                        }}
+                    }}
+                }}
+            }}
         }}
-      }}
+        repositoriesContributedTo(
+            first: 100,
+            includeUserRepositories: false,
+            orderBy: {{
+                field: UPDATED_AT,
+                direction: DESC
+            }},
+            contributionTypes: [
+                COMMIT,
+                PULL_REQUEST,
+                REPOSITORY,
+                PULL_REQUEST_REVIEW
+            ]
+            after: {"null" if contrib_cursor is None else '"'+ contrib_cursor +'"'}
+        ) {{
+            pageInfo {{
+                hasNextPage
+                endCursor
+            }}
+            nodes {{
+                nameWithOwner
+                stargazers {{
+                    totalCount
+                }}
+                forkCount
+                languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
+                    edges {{
+                        size
+                        node {{
+                            name
+                            color
+                        }}
+                    }}
+                }}
+            }}
+        }}
     }}
-  }}
-}}
-"""
+}}"""
 
     @staticmethod
     def contrib_years() -> str:
@@ -226,11 +224,11 @@ class Queries(object):
 
         return """
 query {
-  viewer {
-    contributionsCollection {
-      contributionYears
+    viewer {
+        contributionsCollection {
+            contributionYears
+        }
     }
-  }
 }
 """
 
@@ -249,9 +247,9 @@ query {
         from: "{year}-01-01T00:00:00Z",
         to: "{int(year) + 1}-01-01T00:00:00Z"
     ) {{
-      contributionCalendar {{
-        totalContributions
-      }}
+        contributionCalendar {{
+            totalContributions
+        }}
     }}
 """
 
@@ -270,9 +268,9 @@ query {
         by_years = "\n".join(map(cls.contribs_by_year, years))
         return f"""
 query {{
-  viewer {{
-    {by_years}
-  }}
+    viewer {{
+        {by_years}
+    }}
 }}
 """
 
