@@ -12,8 +12,10 @@ A workflow that generates various statistics about my GitHub activity in the for
 
 ![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-dark.svg)
 ![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-dark.svg)
+![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-community-dark.svg)
 ![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-light.svg)
 ![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg)
+![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-community-light.svg)
 
 ### Features
 
