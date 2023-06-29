@@ -19,6 +19,13 @@ foreignObject {
     height: calc(100% - 10px - 24px);
 }
 
+div.ellipsis {
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 h2 {
     margin: 0;
     padding: 0;
@@ -27,6 +34,20 @@ h2 {
     font-weight: 600;
     line-height: 24px;
     color: #0A69DA;
+}
+
+.progress {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    background-color: rgb(225, 228, 232);
+    border-radius: 6px;
+    outline: 1px solid transparent;
+    margin-bottom: 1em;
+}
+
+.progress-item {
+    border-collapse: collapse;
 }
 
 ul {
@@ -48,11 +69,8 @@ li {
     padding: 0.25em 0;
 }
 
-div.ellipsis {
-    display: flex;
-    flex-flow: column;
-    overflow: hidden;
-    text-overflow: ellipsis;
+li:nth-child(even) {
+    justify-content: right;
 }
 
 .octicon {
@@ -60,20 +78,6 @@ div.ellipsis {
 	vertical-align: top;
 	color: #586069;
 	fill: #586069;
-}
-
-.progress {
-    display: flex;
-    height: 8px;
-    overflow: hidden;
-    background-color: rgb(225, 228, 232);
-    border-radius: 6px;
-    outline: 1px solid transparent;
-    margin-bottom: 1em;
-}
-
-.progress-item {
-    border-collapse: collapse;
 }
 
 .lang {
@@ -94,7 +98,7 @@ div.ellipsis {
                     <h2>Most Used Languages</h2>
                     <div>
                         <span class="progress">
-                        <span style="background-color: #f1e05a;width: 27.222%;" class="progress-item"></span><span style="background-color: #3572A5;width: 23.946%;" class="progress-item"></span><span style="background-color: #3178c6;width: 23.243%;" class="progress-item"></span><span style="background-color: #c6538c;width: 14.488%;" class="progress-item"></span><span style="background-color: #3d8137;width: 7.184%;" class="progress-item"></span><span style="background-color: #563d7c;width: 2.434%;" class="progress-item"></span><span style="background-color: #e34c26;width: 1.287%;" class="progress-item"></span><span style="background-color: #f7931e;width: 0.195%;" class="progress-item"></span>
+                        <span style="background-color: #f1e05a;width: 27.217%;" class="progress-item"></span><span style="background-color: #3572A5;width: 23.962%;" class="progress-item"></span><span style="background-color: #3178c6;width: 23.238%;" class="progress-item"></span><span style="background-color: #c6538c;width: 14.485%;" class="progress-item"></span><span style="background-color: #3d8137;width: 7.183%;" class="progress-item"></span><span style="background-color: #563d7c;width: 2.434%;" class="progress-item"></span><span style="background-color: #e34c26;width: 1.287%;" class="progress-item"></span><span style="background-color: #f7931e;width: 0.195%;" class="progress-item"></span>
                         </span>
                     </div>
                     <ul>
@@ -108,7 +112,7 @@ div.ellipsis {
 <li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3572A5;" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">Python</span>
-<span class="percent">23.95%</span>
+<span class="percent">23.96%</span>
 </li>
 
 <li>
