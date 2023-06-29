@@ -68,7 +68,8 @@
                 "font-weight": "600",
                 "font-size": "12px",
                 "padding": "0.25em 0",
-                "line-height": "21px"
+                "line-height": "21px",
+                "text-align": "right"
             },
             "light": {
                 "color": "#233"

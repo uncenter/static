@@ -31,6 +31,7 @@ td {
     font-size: {{ styles.element.font-size }};
     line-height: {{ styles.element.line-height }};
     color: {{ styles.element.color }};
+    text-align: {{ styles.element.text-align }};
 }
 
 tr > td:nth-child(1) {
@@ -49,7 +50,7 @@ tr > td:nth-child(1) {
                     <table>
                         <thead>
                             <tr>
-                                <th colspan="2">{{ name }}'s GitHub Stats</th>
+                                <th colspan="2">Activity Overview</th>
                             </tr>
                         </thead>
                         <tbody>

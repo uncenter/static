@@ -9,6 +9,13 @@ foreignObject {
     height: calc(100% - 10px - 24px);
 }
 
+div.ellipsis {
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 h2 {
     margin: 0;
     padding: 0;
@@ -17,6 +24,20 @@ h2 {
     font-weight: {{ styles.heading.font-weight }};
     line-height: {{ styles.heading.line-height }};
     color: {{ styles.heading.color }};
+}
+
+.progress {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    background-color: {{ styles.progress.background-color }};
+    border-radius: 6px;
+    outline: 1px solid transparent;
+    margin-bottom: 1em;
+}
+
+.progress-item {
+    border-collapse: collapse;
 }
 
 ul {
@@ -38,28 +59,11 @@ li {
     padding: {{ styles.element.padding }};
 }
 
-div.ellipsis {
-    display: flex;
-    flex-flow: column;
-    overflow: hidden;
-    text-overflow: ellipsis;
+li:nth-child(even) {
+    justify-content: right;
 }
 
 {{ styles.octicon }}
-
-.progress {
-    display: flex;
-    height: 8px;
-    overflow: hidden;
-    background-color: {{ styles.progress.background-color }};
-    border-radius: 6px;
-    outline: 1px solid transparent;
-    margin-bottom: 1em;
-}
-
-.progress-item {
-    border-collapse: collapse;
-}
 
 .lang {
     font-weight: {{ styles.element.font-weight }};
