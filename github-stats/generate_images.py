@@ -6,6 +6,7 @@ import re
 import aiohttp
 import json
 from dotenv import load_dotenv
+from typing import Dict
 
 load_dotenv()
 
@@ -25,7 +26,7 @@ def create_output_folder() -> None:
         os.mkdir(__OUTPUT_DIR__)
 
 
-def replace_with_data(data: dict[str, str], content: str) -> str:
+def replace_with_data(data: Dict[str, str], content: str) -> str:
     """
     Replace placeholder strings in a template with associated data.
 
@@ -42,7 +43,7 @@ def replace_with_data(data: dict[str, str], content: str) -> str:
     return content
 
 
-def get_inserted_styles():
+def get_inserted_styles() -> Dict[str, Dict[str, str]]:
     """
     Convert template styles from JSON to CSS properties, themed for light and dark mode.
 
