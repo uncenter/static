@@ -206,7 +206,9 @@ async def main() -> None:
             exclude_forked_repos=exclude_forked_repos,
             exclude_private_repos=exclude_private_repos,
         )
-        await asyncio.gather(generate_languages(s), generate_overview(s))
+        await asyncio.gather(
+            generate_languages(s), generate_overview(s), generate_community(s)
+        )
 
 
 if __name__ == "__main__":
