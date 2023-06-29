@@ -1,5 +1,11 @@
 # Static
 
+## To-do
+
+-   [ ] `community.svg` and `overview.svg` templates are identical except for table rows - figure out how to generate both from one template
+-   [ ] Add new cards without adding a new function to `generate_images.py`?
+-   [ ] Add environment variables for generated file names, headers, etc.
+
 ## `github-stats`
 
 A workflow that generates various statistics about my GitHub activity in the form of SVGs. Check out the [original project (GitHub Stats Visualization)](https://github.com/jstrieb/github-stats) and [idiotWu's more updated fork](https://github.com/idiotWu/stats) that served as the basis for some of the changes I made.
@@ -22,18 +28,26 @@ A workflow that generates various statistics about my GitHub activity in the for
 
 ```html
 <picture>
-  <source
-    srcset="https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-dark.svg"
-    media="(prefers-color-scheme: dark)"
-  />
-  <img src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg" />
+    <source
+        srcset="
+            https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-dark.svg
+        "
+        media="(prefers-color-scheme: dark)"
+    />
+    <img
+        src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg"
+    />
 </picture>
 <picture>
-  <source
-    srcset="https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-dark.svg"
-    media="(prefers-color-scheme: dark)"
-  />
-  <img src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-light.svg" />
+    <source
+        srcset="
+            https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-dark.svg
+        "
+        media="(prefers-color-scheme: dark)"
+    />
+    <img
+        src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-light.svg"
+    />
 </picture>
 ```
 
