@@ -4,6 +4,7 @@ import aiohttp
 import requests
 import asyncio
 import os
+import pendulum
 from typing import Dict, List, Optional, Set, Tuple, Any, cast
 
 
@@ -112,6 +113,19 @@ class Queries(object):
   viewer {{
     login,
     name,
+    createdAt,
+    followers {{
+        totalCount
+    }},
+    following {{
+        totalCount
+    }},
+    sponsoring {{
+        totalCount
+    }},
+    starredRepositories {{
+        totalCount
+    }},
     repositories(
         {"privacy: PUBLIC," if exclude_private_repos else ""}
         first: 100,
@@ -255,6 +269,11 @@ class Stats(object):
         self.queries = Queries(username, access_token, session)
 
         self._name: Optional[str] = None
+        self._joined: Optional[str] = None
+        self._followers: Optional[int] = None
+        self._following: Optional[int] = None
+        self._sponsoring: Optional[int] = None
+        self._starred_repos: Optional[int] = None
         self._stargazers: Optional[int] = None
         self._forks: Optional[int] = None
         self._total_contributions: Optional[int] = None
@@ -294,6 +313,38 @@ class Stats(object):
                     .get("viewer", {})
                     .get("login", "No Name")
                 )
+            created_at = (
+                raw_results.get("data", {}).get("viewer", {}).get("createdAt", None)
+            )
+
+            if created_at is not None:
+                self._joined = pendulum.parse(created_at).diff_for_humans()
+            else:
+                self._joined = "Unknown"
+            self._followers = (
+                raw_results.get("data", {})
+                .get("viewer", {})
+                .get("followers", {})
+                .get("totalCount", 0)
+            )
+            self._following = (
+                raw_results.get("data", {})
+                .get("viewer", {})
+                .get("following", {})
+                .get("totalCount", 0)
+            )
+            self._sponsoring = (
+                raw_results.get("data", {})
+                .get("viewer", {})
+                .get("sponsoring", {})
+                .get("totalCount", 0)
+            )
+            self._starred_repos = (
+                raw_results.get("data", {})
+                .get("viewer", {})
+                .get("starredRepositories", {})
+                .get("totalCount", 0)
+            )
 
             contrib_repos = (
                 raw_results.get("data", {})
@@ -359,6 +410,61 @@ class Stats(object):
         await self.get_stats()
         assert self._name is not None
         return self._name
+
+    @property
+    async def joined(self) -> str:
+        """
+        :return: GitHub user's join date (relative)
+        """
+        if self._joined is not None:
+            return self._joined
+        await self.get_stats()
+        assert self._joined is not None
+        return self._joined
+
+    @property
+    async def followers(self) -> int:
+        """
+        :return: total number of followers
+        """
+        if self._followers is not None:
+            return self._followers
+        await self.get_stats()
+        assert self._followers is not None
+        return self._followers
+
+    @property
+    async def following(self) -> int:
+        """
+        :return: total number of users followed by the user
+        """
+        if self._following is not None:
+            return self._following
+        await self.get_stats()
+        assert self._following is not None
+        return self._following
+
+    @property
+    async def sponsoring(self) -> int:
+        """
+        :return: total number of users and organizations sponsored by the user
+        """
+        if self._sponsoring is not None:
+            return self._sponsoring
+        await self.get_stats()
+        assert self._sponsoring is not None
+        return self._sponsoring
+
+    @property
+    async def starred_repos(self) -> int:
+        """
+        :return: total number of repos starred by the user
+        """
+        if self._starred_repos is not None:
+            return self._starred_repos
+        await self.get_stats()
+        assert self._starred_repos is not None
+        return self._starred_repos
 
     @property
     async def stargazers(self) -> int:

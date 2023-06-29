@@ -142,6 +142,35 @@ async def generate_languages(s: Stats) -> None:
             f.write(replace_with_data(get_inserted_styles()[theme], output))
 
 
+async def generate_community(s: Stats) -> None:
+    """
+    Generate an SVG badge with community statistics
+    :param s: Represents user's GitHub statistics
+    """
+    with open(os.path.join(__DIRNAME__, "templates/community.svg"), "r") as f:
+        template = f.read()
+
+    output = replace_with_data(
+        {
+            "joined": await s.joined,
+            "followers": f"{s.followers:,}",
+            "following": f"{s.following:,}",
+            "stars": f"{await s.starred_repos:,}",
+            "sponsoring": f"{await s.sponsoring:,}",
+        },
+        template,
+    )
+
+    create_output_folder()
+
+    for theme in ["light", "dark"]:
+        with open(
+            os.path.join(__DIRNAME__, f"generated/github-stats-community-{theme}.svg"),
+            "w",
+        ) as f:
+            f.write(replace_with_data(get_inserted_styles()[theme], output))
+
+
 async def main() -> None:
     access_token = os.getenv("ACCESS_TOKEN")
     if not access_token:
