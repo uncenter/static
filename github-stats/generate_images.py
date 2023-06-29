@@ -5,6 +5,9 @@ import os
 import re
 import aiohttp
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from github_stats import Stats
 
