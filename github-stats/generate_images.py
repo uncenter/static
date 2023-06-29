@@ -153,8 +153,8 @@ async def generate_community(s: Stats) -> None:
     output = replace_with_data(
         {
             "joined": await s.joined,
-            "followers": f"{s.followers:,}",
-            "following": f"{s.following:,}",
+            "followers": f"{await s.followers:,}",
+            "following": f"{await s.following:,}",
             "stars": f"{await s.starred_repos:,}",
             "sponsoring": f"{await s.sponsoring:,}",
         },
