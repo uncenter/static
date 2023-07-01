@@ -8,9 +8,9 @@ import json
 from dotenv import load_dotenv
 from typing import Dict
 
-load_dotenv()
-
 from github_stats import Stats
+
+load_dotenv()
 
 __DIRNAME__ = os.path.realpath(os.path.dirname(__file__))
 __TEMPLATE_DIR__ = os.path.join(__DIRNAME__, "templates")
@@ -60,17 +60,21 @@ def get_inserted_styles() -> Dict[str, Dict[str, str]]:
         _selector = value.get("selector")
         _properties = value.get("properties")
         _both = (
-            (_properties.get("both").items()) if _properties.get("both") != None else {}
+            (_properties.get("both").items())
+            if _properties.get("both") is not None
+            else {}
         )
         _light = (
             (_properties.get("light").items())
-            if _properties.get("light") != None
+            if _properties.get("light") is not None
             else {}
         )
         _dark = (
-            (_properties.get("dark").items()) if _properties.get("dark") != None else {}
+            (_properties.get("dark").items())
+            if _properties.get("dark") is not None
+            else {}
         )
-        if _selector != False:
+        if _selector is not False:
             _both_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _both])
             _light_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _light])
             _dark_properties = "".join([f"\t{prop}: {val};\n" for prop, val in _dark])
@@ -147,11 +151,7 @@ async def generate_languages(s: Stats, output_path: str) -> None:
     for lang, data in sorted_languages:
         color = data.get("color")
         color = color if color is not None else "#000000"
-        progress += (
-            f'<span style="background-color: {color};'
-            f'width: {data.get("prop", 0):0.3f}%;" '
-            f'class="progress-item"></span>'
-        )
+        progress += f'<span style="background-color: {color}; width: {data.get("prop", 0):0.3f}%;"></span>'
         lang_list += f"""<li>
 <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:{color};" viewBox="0 0 16 16" width="16" height="16"><circle xmlns="http://www.w3.org/2000/svg" cx="8" cy="9" r="5" /></svg>
 <span class="lang">{lang}</span>
@@ -213,7 +213,7 @@ async def generate_community(s: Stats, output_path: str) -> None:
 
 
 async def main() -> None:
-    def string_to_list(string):
+    def string_to_list(string) -> list:
         """
         Convert a comma-separated string to a list of strings
 
@@ -226,7 +226,7 @@ async def main() -> None:
 
         return [x.strip() for x in string.split(",")] if string else []
 
-    def truthy(value):
+    def truthy(value, default=False) -> bool:
         """
         Convert an unknown value to a boolean
 
@@ -243,7 +243,7 @@ async def main() -> None:
             return value == 1
         elif type(value) == bool:
             return value
-        return False
+        return default
 
     access_token = os.getenv("ACCESS_TOKEN")
     if not access_token:
@@ -253,8 +253,8 @@ async def main() -> None:
         raise RuntimeError("Environment variable GITHUB_ACTOR must be set.")
     excluded_repos = string_to_list(os.getenv("EXCLUDED"))
     excluded_langs = string_to_list(os.getenv("EXCLUDED_LANGS"))
-    exclude_forked_repos = truthy(os.getenv("EXCLUDE_FORKED_REPOS"))
-    exclude_private_repos = truthy(os.getenv("EXCLUDE_PRIVATE_REPOS"))
+    exclude_forked_repos = truthy(os.getenv("EXCLUDE_FORKED_REPOS"), True)
+    exclude_private_repos = truthy(os.getenv("EXCLUDE_PRIVATE_REPOS"), True)
     generated_image_path = os.getenv("GENERATED_IMAGE_PATH")
     if generated_image_path is None:
         raise RuntimeError("Environment variable GENERATED_IMAGE_PATH must be set.")
