@@ -1,8 +1,4 @@
-# Static
-
-## To-do
-
-## `github-stats`
+# `github-stats`
 
 A workflow that generates various statistics about my GitHub activity in the form of SVGs. Check out the [original project (GitHub Stats Visualization)](https://github.com/jstrieb/github-stats) and [idiotWu's more updated fork](https://github.com/idiotWu/stats) that served as the basis for some of the changes I made.
 
@@ -13,7 +9,7 @@ A workflow that generates various statistics about my GitHub activity in the for
 ![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg)
 ![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-community-light.svg)
 
-### Features
+## Features
 
 -   No distracting animations
 -   Consistent styling and overall layout between the two generated images
@@ -22,7 +18,7 @@ A workflow that generates various statistics about my GitHub activity in the for
 -   Larger color circles for each language label
 -   `EXCLUDE_PRIVATE_REPOS` option
 
-### Displaying with media queries
+## Displaying with media queries
 
 ```html
 <picture>
@@ -49,7 +45,7 @@ A workflow that generates various statistics about my GitHub activity in the for
 </picture>
 ```
 
-### Options
+## Options
 
 For each of the following options, add a new secret with the name and value to your repository's secrets (under the `Settings` tab). Some of the values are added as secrets by default to prevent leaking information about private repositories. If you're not worried about that, you can change the values directly in the workflow itself - just replace `VARIABLE_NAME: ${{ secrets.VARIABLE_NAME }}` with the value you want, like `VARIABLE_NAME: true`. Any options which take "lists" of values should be set as comma seperated values inside a single string.
 
