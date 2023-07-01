@@ -2,12 +2,12 @@
 
 A workflow that generates various statistics about my GitHub activity in the form of SVGs. Check out the [original project (GitHub Stats Visualization)](https://github.com/jstrieb/github-stats) and [idiotWu's more updated fork](https://github.com/idiotWu/stats) that served as the basis for some of the changes I made.
 
-![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-dark.svg)
-![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-dark.svg)
-![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-community-dark.svg)
-![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-light.svg)
-![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg)
-![](https://raw.githubusercontent.com/uncenter/static/main/github-stats-community-light.svg)
+![](https://raw.githubusercontent.com/uncenter/github-stats/main/github-stats-overview-dark.svg)
+![](https://raw.githubusercontent.com/uncenter/github-stats/main/github-stats-languages-dark.svg)
+![](https://raw.githubusercontent.com/uncenter/github-stats/main/github-stats-community-dark.svg)
+![](https://raw.githubusercontent.com/uncenter/github-stats/main/github-stats-overview-light.svg)
+![](https://raw.githubusercontent.com/uncenter/github-stats/main/github-stats-languages-light.svg)
+![](https://raw.githubusercontent.com/uncenter/github-stats/main/github-stats-community-light.svg)
 
 ## Features
 
