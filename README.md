@@ -17,33 +17,7 @@ A workflow that generates various statistics about my GitHub activity in the for
 -   Languages aligned in clean looking columns
 -   Larger color circles for each language label
 -   `EXCLUDE_PRIVATE_REPOS` option
-
-## Displaying with media queries
-
-```html
-<picture>
-    <source
-        srcset="
-            https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-dark.svg
-        "
-        media="(prefers-color-scheme: dark)"
-    />
-    <img
-        src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-languages-light.svg"
-    />
-</picture>
-<picture>
-    <source
-        srcset="
-            https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-dark.svg
-        "
-        media="(prefers-color-scheme: dark)"
-    />
-    <img
-        src="https://raw.githubusercontent.com/uncenter/static/main/github-stats-overview-light.svg"
-    />
-</picture>
-```
+-   Additional `community` image/card
 
 ## Options
 
