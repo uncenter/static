@@ -4,10 +4,9 @@
 
 {{ styles.background }}
 
-foreignObject {
-    width: calc(100% - 10px - 32px);
-    height: calc(100% - 10px - 24px);
-}
+{{ styles.foreignObject }}
+
+{{ styles.octicon }}
 
 div.ellipsis {
     display: flex;
@@ -62,8 +61,6 @@ li {
 li:nth-child(even) {
     justify-content: right;
 }
-
-{{ styles.octicon }}
 
 .lang {
     font-weight: {{ styles.element.font-weight }};
