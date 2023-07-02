@@ -15,8 +15,15 @@ svg {
 }
 
 foreignObject {
-    width: calc(100% - 10px - 32px);
-    height: calc(100% - 10px - 24px);
+	width: calc(100% - 10px - 32px);
+	height: calc(100% - 10px - 24px);
+}
+
+.octicon {
+	margin-right: 1ch;
+	vertical-align: top;
+	color: #8b949e;
+	fill: #8b949e;
 }
 
 table {
@@ -48,13 +55,6 @@ tr > td:nth-child(1) {
     font-weight: 600;
     display: flex;
     align-items: center;
-}
-
-.octicon {
-	margin-right: 1ch;
-	vertical-align: top;
-	color: #8b949e;
-	fill: #8b949e;
 }
 </style>
 <g>

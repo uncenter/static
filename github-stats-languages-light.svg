@@ -15,8 +15,15 @@ svg {
 }
 
 foreignObject {
-    width: calc(100% - 10px - 32px);
-    height: calc(100% - 10px - 24px);
+	width: calc(100% - 10px - 32px);
+	height: calc(100% - 10px - 24px);
+}
+
+.octicon {
+	margin-right: 1ch;
+	vertical-align: top;
+	color: #586069;
+	fill: #586069;
 }
 
 div.ellipsis {
@@ -71,13 +78,6 @@ li {
 
 li:nth-child(even) {
     justify-content: right;
-}
-
-.octicon {
-	margin-right: 1ch;
-	vertical-align: top;
-	color: #586069;
-	fill: #586069;
 }
 
 .lang {
