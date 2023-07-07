@@ -98,7 +98,7 @@ li:nth-child(even) {
                     <h2>Most Used Languages</h2>
                     <div>
                         <span class="progress">
-                        <span style="background-color: #3572A5; width: 24.619%;"></span><span style="background-color: #f1e05a; width: 24.454%;"></span><span style="background-color: #3178c6; width: 21.404%;"></span><span style="background-color: #c6538c; width: 13.941%;"></span><span style="background-color: #3d8137; width: 7.157%;"></span><span style="background-color: #e34c26; width: 3.195%;"></span><span style="background-color: #89e051; width: 2.713%;"></span><span style="background-color: #563d7c; width: 2.329%;"></span>
+                        <span style="background-color: #3572A5; width: 24.619%;"></span><span style="background-color: #f1e05a; width: 24.453%;"></span><span style="background-color: #3178c6; width: 21.404%;"></span><span style="background-color: #c6538c; width: 13.941%;"></span><span style="background-color: #3d8137; width: 7.159%;"></span><span style="background-color: #e34c26; width: 3.195%;"></span><span style="background-color: #89e051; width: 2.713%;"></span><span style="background-color: #563d7c; width: 2.329%;"></span>
                         </span>
                     </div>
                     <ul>
